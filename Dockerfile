@@ -28,7 +28,7 @@ RUN echo "root:toorroot" | chpasswd
 RUN apt-get -y install iputils-ping net-tools nano
 
 # Add group docker
-RUN groupadd docker
+#RUN groupadd docker
 
 # Add files
 RUN echo "/opt/docker_shell.sh" >> /etc/shells
