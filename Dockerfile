@@ -15,20 +15,20 @@ RUN add-apt-repository \
     $(lsb_release -cs) \
     stable"
 RUN apt-get update
-RUN apt-get -y install docker-ce
+RUN apt-get -y install docker-ce docker-ce-cli containerd.io
 #RUN service docker start
 
 # Install ssh server
 RUN apt-get -y install openssh-server
 RUN awk '{if($1 == "PermitRootLogin")$2="yes"; print }' /etc/ssh/sshd_config > /tmp/sshd_config && \
     cp /tmp/sshd_config /etc/ssh/sshd_config
-RUN echo "root:toor" | chpasswd
+RUN echo "root:toorroot" | chpasswd
 
 # Install some utils
 RUN apt-get -y install iputils-ping net-tools nano
 
 # Add group docker
-#RUN groupadd docker
+RUN groupadd docker
 
 # Add files
 RUN echo "/opt/docker_shell.sh" >> /etc/shells
